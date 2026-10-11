@@ -1,5 +1,5 @@
 'use strict';
-const EMAIL = 'bhavishyapriyadarshini@gmail.com';
+const EMAIL = 'bhavishyapriyadarshini9@gmail.com';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -164,10 +164,17 @@ function initScroll() {
   $$('.reveal').forEach(r => rev.observe(r));
 }
 function initModal() {
-  const m = $('#modal');
+  const m = $('#modal'), rm = $('#resumeModal');
   $('#projectGrid').addEventListener('click', e => { const b = e.target.closest('.more'); if (b) openProject(+b.dataset.i); });
   $('#mClose').addEventListener('click', () => m.close());
   m.addEventListener('click', e => { if (e.target === m) m.close(); });
+
+  const prevBtn = $('#previewResumeBtn');
+  if (prevBtn && rm) {
+    prevBtn.addEventListener('click', () => rm.showModal());
+    $('#rClose')?.addEventListener('click', () => rm.close());
+    rm.addEventListener('click', e => { if (e.target === rm) rm.close(); });
+  }
 }
 function initContact() {
   $('#copyMail').addEventListener('click', async e => {
